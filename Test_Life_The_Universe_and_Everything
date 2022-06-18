@@ -1,0 +1,19 @@
+using System;
+
+public static class Program
+{
+    private static void Main() => Test.Solve();
+}
+
+public static class Test
+{
+    public static void Solve()
+    {
+        string line;
+        while ((line = Console.ReadLine()) != "42")
+        {
+            Console.WriteLine(line);
+        }
+    }
+}
+
