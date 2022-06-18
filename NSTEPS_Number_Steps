@@ -1,0 +1,30 @@
+using System;
+namespace NSTEPS_Number_Steps
+{
+    public static class Program
+    {
+        private static void Main()
+        {
+            int remainingTestCases = int.Parse(Console.ReadLine());
+            while (remainingTestCases-- > 0)
+            {
+                int[] line = Array.ConvertAll(Console.ReadLine().Split(), int.Parse);
+
+                Console.WriteLine(
+                    Nsteps.Solve(line[0], line[1]));
+            }
+        }
+    }
+    public static class Nsteps
+    {
+        public static string Solve(int x, int y)
+        {
+            if (x == y || x == y + 2)
+                return x % 2 == 0
+                    ? (x + y).ToString()
+                    : (x + y - 1).ToString();
+            return "No Number";
+        }
+    }
+}
+
