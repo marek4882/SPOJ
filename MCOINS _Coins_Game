@@ -1,0 +1,51 @@
+using System;
+using System.Linq;
+using System.Text;
+
+public static class Program
+{
+    private static void Main()
+    {
+        int[] line = Array.ConvertAll(Console.ReadLine().Split(), int.Parse);
+        int[] coinCounts = Array.ConvertAll(Console.ReadLine().Split(), int.Parse);
+
+        Console.WriteLine(
+            MCOINS.Solve(line[0], line[1], coinCounts));
+    }
+}
+public static class MCOINS
+{
+    public static string Solve(int x, int z, int[] coinCounts)
+    {
+        int maxCoinCount = coinCounts.Max();
+
+        bool[] firstPlayerWins = new bool[maxCoinCount + 1];
+        firstPlayerWins[0] = false; // False needed for the base case.
+        firstPlayerWins[1] = true;  // By playing 1.
+
+        for (int coinCount = 2; coinCount <= maxCoinCount; ++coinCount)
+        {
+            bool existsAStartMoveThatForcesSecondPlayerToLose =
+                !firstPlayerWins[coinCount - 1]
+                || coinCount - x >= 0 && !firstPlayerWins[coinCount - x]
+                || coinCount - z >= 0 && !firstPlayerWins[coinCount - z];
+
+            firstPlayerWins[coinCount] = existsAStartMoveThatForcesSecondPlayerToLose;
+        }
+
+        var winners = new StringBuilder();
+        foreach (int coinCount in coinCounts)
+        {
+            winners.Append(firstPlayerWins[coinCount] ? 'A' : 'B');
+        }
+
+        return winners.ToString();
+    }
+}
+
+
+
+
+
+  
+  
