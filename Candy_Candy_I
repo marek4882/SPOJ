@@ -1,0 +1,39 @@
+using System;
+using System.Linq;
+public static class Program
+{
+    private static void Main()
+    {
+        int packetCount;
+        while ((packetCount = int.Parse(Console.ReadLine())) != -1)
+        {
+            int[] packetCandyCounts = new int[packetCount];
+            for (int i = 0; i < packetCount; ++i)
+            {
+                packetCandyCounts[i] = int.Parse(Console.ReadLine());
+            }
+
+            Console.WriteLine(
+                Candy.Solve(packetCandyCounts));
+        }
+    }
+}
+public static class Candy
+{
+    public static int Solve(int[] packetCandyCounts)
+    {
+        int packetCount = packetCandyCounts.Length;
+        int totalCandies = packetCandyCounts.Sum();
+
+        if (totalCandies % packetCount != 0)
+            return -1; 
+
+        int fairCandyCount = totalCandies / packetCount;
+        return packetCandyCounts
+            .Where(c => c > fairCandyCount)
+            .Select(c => c - fairCandyCount)
+            .Sum();
+    }
+}
+
+
