@@ -1,33 +1,34 @@
 ﻿using System;
+using System.Linq;
 
-public static class Program
+namespace ARMY_Army_Strength
 {
-    private static void Main()
+    public static class Program
     {
-        int przypadkitestowe = int.Parse(Console.ReadLine());
-        while (przypadkitestowe-- > 0)
+        private static void Main()
         {
-            int[] line = Array.ConvertAll(Console.ReadLine().Split(), int.Parse);
+            int remainingTestCases = int.Parse(Console.ReadLine());
+            while (remainingTestCases-- > 0)
+            {
+                Console.ReadLine();
+                Console.ReadLine();
 
-            Console.WriteLine(
-                ADDREV.Solve(line[0], line[1]));
+                int[] strengthsOfGodzillasArmy = Array.ConvertAll(
+                    Console.ReadLine().Split(), int.Parse);
+                int[] strengthsOfMechaGodzillasArmy = Array.ConvertAll(
+                    Console.ReadLine().Split(), int.Parse);
+
+                Console.WriteLine(
+                    ARMY.Solve(strengthsOfGodzillasArmy, strengthsOfMechaGodzillasArmy));
+            }
         }
     }
-}
-public static class ADDREV
-{
-    public static int Solve(int a, int b) => (a.Reverse() + b.Reverse()).Reverse();
-
-    private static int Reverse(this int a)
+    public static class ARMY
     {
-        int reverse = 0;
-        while (a != 0)
-        {
-            reverse = reverse * 10 + a % 10;
-            a = a / 10;
-        }
-        return reverse;
+        public static string Solve(
+            int[] strengthsOfGodzillasArmy, int[] strengthsOfMechaGodzillasArmy)
+            => strengthsOfGodzillasArmy.Max()
+            >= strengthsOfMechaGodzillasArmy.Max()
+            ? "Godzilla" : "MechaGodzilla";
     }
 }
-
-
