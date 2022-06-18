@@ -1,0 +1,25 @@
+using System;
+namespace GIRLSNBS_Girls_and_Boys
+{
+    public static class Program
+    {
+        private static void Main()
+        {
+            int[] line;
+            while ((line = Array.ConvertAll(Console.ReadLine().Split(), int.Parse))[0] != -1)
+            {
+                Console.WriteLine(GIRLSNBS.Solve(line[0], line[1]));
+            }
+        }
+    }
+    public static class GIRLSNBS
+    {
+        public static int Solve(int girlCount, int boyCount)
+        {
+            int maxCount = Math.Max(girlCount, boyCount);
+            int minCount = Math.Min(girlCount, boyCount);
+
+            return (int)Math.Ceiling((double)maxCount / (minCount + 1));
+        }
+    }
+}
