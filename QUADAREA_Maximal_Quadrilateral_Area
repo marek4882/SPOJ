@@ -1,0 +1,34 @@
+using System;
+using System.Text;
+
+namespace QUADAREA_Maximal_Quadritareal_Area
+{
+    public static class Quadarea
+    {
+        public static class Program
+        {
+            private static void Main()
+            {
+                var output = new StringBuilder();
+                int remainingTestCases = int.Parse(Console.ReadLine());
+                while (remainingTestCases-- > 0)
+                {
+                    double[] line = Array.ConvertAll(Console.ReadLine().Split(), double.Parse);
+
+                    output.AppendLine(
+                        Quadarea.Solve(line[0], line[1], line[2], line[3]).ToString());
+                }
+                Console.Write(output);
+            }
+        }
+
+        public static double Solve(double x, double y, double z, double c)
+        {
+            double p = (x + y + z + c) / 2;
+
+            return Math.Sqrt((p - x) * (p - y) * (p - z) * (p - c));
+        }
+    }
+
+   
+}
