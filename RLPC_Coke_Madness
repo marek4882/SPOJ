@@ -1,0 +1,36 @@
+using System;
+namespace RPLC_Coke_Madness
+{
+    public static class Program
+    {
+        private static void Main()
+        {
+            int testCount = int.Parse(Console.ReadLine());
+            for (int t = 1; t <= testCount; ++t)
+            {
+                int n = int.Parse(Console.ReadLine());
+                int[] cokes = Array.ConvertAll(Console.ReadLine().Split(), int.Parse);
+
+                Console.WriteLine(
+                    $"Scenario #{t}: {Rplc.Solve(cokes)}");
+            }
+        }
+    }
+    public static class Rplc
+    {
+        public static long Solve(int[] cokes)
+        {
+            long currentEnergyLevel = 0;
+            long lowestEnergyLevel = 0;
+            for (int i = 0; i < cokes.Length; ++i)
+            {
+                currentEnergyLevel += cokes[i];
+                if (currentEnergyLevel < lowestEnergyLevel)
+                {
+                    lowestEnergyLevel = currentEnergyLevel;
+                }
+            }
+            return lowestEnergyLevel < 0  ? -1 * lowestEnergyLevel + 1 : 1;
+        }
+    }
+}
